@@ -8,20 +8,20 @@ The k8s-bootstrapper leverages the [Argo CD's App of Apps](https://argo-cd.readt
 # Bootstrap
 .
 ├── Chart.yaml # boiler plate chart.yaml
-├── README.md 
+├── README.md
 ├── bootstrap-resources # ingress/cluster issuer
-├── bootstrap.yaml # parent app 
+├── bootstrap.yaml # parent app
 ├── templates # child app templates (one file per app)
 └── values.yaml # bootstrapper chart overrides: enable/disable apps
 ```
 
-In this case, the parent app "**bootstrap**" is installed along with its *child apps* which are rendered from `templates/` and `bootstrap-resources/` directories.
+In this case, the parent app "**bootstrap**" is installed along with its _child apps_ which are rendered from `templates/` and `bootstrap-resources/` directories.
 By default, we have disabled most of the apps, but you can easily enable them by setting the flags in the [values.yaml](./values.yaml)
 
 ```yaml
 # values.yaml
 # Global
-domain: 
+domain:
 storageClass: "do-block-storage"
 # Application specific
 bots:
@@ -29,7 +29,7 @@ bots:
 guestbook:
   enable: false
 kyverno:
-  enable: false  
+  enable: false
 logging:
   enable: false
 observability:
@@ -38,7 +38,7 @@ observability:
   storageSize: 50Gi
   retention: 5d
 traefik:
-  enable: true  
+  enable: true
 trivy:
   enable: false
 ```
@@ -49,7 +49,7 @@ trivy:
 
 ```bash
 # Let the bootstrap begin!
-kubectl apply -f https://raw.githubusercontent.com/hivenetes/k8s-bootstrapper/main/bootstrap/bootstrap.yaml
+kubectl apply -f https://raw.githubusercontent.com/hvedinich/bootstrap-argocd/main/bootstrap.yaml
 ```
 
 ### Access the ArgoCD Web UI
@@ -63,7 +63,7 @@ kubectl -n argocd port-forward svc/argocd-server 8080:80
 # Login with username: `admin,` password: `paste the value from the previous step.`
 ```
 
->Note: [**Accessing Argo CD via FQDN (optional)**](../argocd/README.md)
+> Note: [**Accessing Argo CD via FQDN (optional)**](../argocd/README.md)
 
 ![argocd-ui](../docs/assets/argocd-ui.png)
 
