@@ -18,11 +18,11 @@ spec:
   - host: bots.{{ .Values.domain }}
     http:
       paths:
-      - path: /
+      - path: /api
         pathType: Prefix
         backend:
           service:
-            name: bots
+            name: api
             port: 
-                number: 8080               
+                number: 8000               
 {{- end }}
